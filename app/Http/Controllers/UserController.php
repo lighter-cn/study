@@ -2364,20 +2364,60 @@ class UserController extends Controller
                 戻り値としてのみ利用できる型で、何も返さないことを表現する
                 voidを利用する場合、return nullはエラーとなるので、何も返さないかreturn;と記述する
 
-
-
         */
 
         /* sample */
 
-            function diamond(float $diagonal1, float $diagonal2): float {
-                return $diagonal1 * $diagonal2 / 2;
-            }
-            print diamond(4, 5);
-
-
+            // function diamond(float $diagonal1, float $diagonal2): float {
+            //     return $diagonal1 * $diagonal2 / 2;
+            // }
+            // print diamond(4, 5);
 
         /* ************************************************** */
+
+        /* 変数のスコープ
+            スコープ :
+                変数の有効範囲
+            グローバルスコープ :
+                スクリプト全体から参照できるスコープ
+            ローカルスコープ :
+                定義された関数の中でのみ参照できるスコープ
+            グローバル変数 :
+                グローバルスコープを持つ変数
+            ローカル変数 :
+                ローカルスコープを持つ変数
+
+            静的変数 :
+                関数の実行後もローカル変数を維持するための概念
+
+            requireなどによって読み込まれたファイルのスコープは読み込み元のスコープによって変動する
+            関数内で読み込んだ場合はローカルスコープになり、関数の外で読み込むとグローバルスコープになる
+        */
+
+        /* sample */
+            // スコープ外のためエラーになる場合
+                // $x = 10;
+                // function example(): int {
+                //     return ++$x;
+                // }
+                // print example();
+                // print $x;
+            // globalを使って強制的にグローバル変数にローカル変数を割り当てた場合、エラーにならない
+                $x = 10;
+                function example(): int {
+                    global $x;
+                    return ++$x;
+                }
+                print example();
+                print $x;
+            // 静的変数を利用してローカル変数の値がカウントアップされる例
+                function example(): int {
+                    static $x = 0;
+                    return ++$x;
+                }
+                print example();
+                print example();
+
         /* ************************************************** */
         /* ************************************************** */
         /* ************************************************** */
