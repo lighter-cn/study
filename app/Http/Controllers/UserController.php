@@ -2403,21 +2403,108 @@ class UserController extends Controller
                 // print example();
                 // print $x;
             // globalを使って強制的にグローバル変数にローカル変数を割り当てた場合、エラーにならない
-                $x = 10;
-                function example(): int {
-                    global $x;
-                    return ++$x;
-                }
-                print example();
-                print $x;
+                // $x = 10;
+                // function example(): int {
+                //     global $x;
+                //     return ++$x;
+                // }
+                // print example();
+                // print $x;
             // 静的変数を利用してローカル変数の値がカウントアップされる例
-                function example(): int {
-                    static $x = 0;
-                    return ++$x;
-                }
-                print example();
-                print example();
+                // function example(): int {
+                //     static $x = 0;
+                //     return ++$x;
+                // }
+                // print example();
+                // print example();
 
+        /* ************************************************** */
+
+        /* 引数の記法
+            引数の既定値
+                = を利用することで仮引数に既定値を使用できる
+                既定値は引数を省略した場合に設定される値
+                また、必須の変数の前に既定値の引数を指定してはいけない
+
+            引数の参照わたし
+                引数は値渡しされるのが基本
+                しかし仮引数の頭に&を付与すると参照渡し隣、実引数を操作することができる
+                ただし、参照渡しされた引数を関数の中で破棄しても元々の変数に影響しない
+
+            名前つき引数(PHP8.0)
+                関数の呼び出し時に名前を明示的に指定できる引数
+                標準ライブラリでも利用でき、公式ドキュメントから引数の名前を確認できる
+
+            可変長引数
+                引数の個数があらかじめ決まっていない関数（0個以上の引数を表す）
+                仮引数の直前に...を付与することで、任意の個数を配列としてまとめて取得できる
+                可変長引数は通常の引数と同じく型宣言ができる
+                可変長引数は通常の引数と同居させることができるが、可変長引数は必ず引数リストの末尾に置かなければならない
+
+            ...演算子による引数のアンパック
+                ...演算子は日引数で利用することで配列を個々の値に展開（アンパック）できる
+
+        */
+
+        /* sample */
+            // 引数だけを省略する例
+                // function getTriangleArea($base = 5, $height = 2){
+                //     return $base * $height / 2;
+                // }
+
+                // print getTriangleArea();
+                // print getTriangleArea(20); // 引数$baseだけを省略することはできない、あくまで後ろの引数だけ
+                // print getTriangleArea(10, 10);
+
+            // 必須の引数の前に既定値の変数を使ったエラー
+                // function getTriangleArea($base = 5, $height){
+                //     return $base * $height / 2;
+                // }
+
+                // print getTriangleArea(20); // ArgumentCountError
+
+            // 引数の参照渡し
+                // function increment(&$value) {
+                //     return ++$value;
+                // }
+                // $num = 10;
+                // print increment($num);
+                // print $num;
+
+            // 名前つき引数
+                // function getTriangleArea($base = 5, $height = 2){
+                //     return $base * $height / 2;
+                // }
+
+                // print getTriangleArea(height: 4); // $baseを省略し、$heightにのみ値を入れられる
+
+            // 可変長引数
+                // function total(int ...$values): int{
+                //     $result = 0;
+                //     foreach($values as $value){
+                //         $result += $value;
+                //     }
+                //     return $result;
+                // }
+                // print total(1,3,4,8);
+                // print total(1,3,4,6,7,8,8);
+
+            // 引数のアンパック
+                // function getTriangleArea($base, $height){
+                //     return $base * $height / 2;
+                // }
+
+                // print getTriangleArea([4, 5]); // ng
+                // print getTriangleArea(...[4, 5]); // ok
+
+        /* ************************************************** */
+
+        /* 関数の呼び出しと戻り値
+
+        */
+        /* ************************************************** */
+        /* ************************************************** */
+        /* ************************************************** */
         /* ************************************************** */
         /* ************************************************** */
         /* ************************************************** */
