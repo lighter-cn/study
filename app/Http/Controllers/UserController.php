@@ -16,6 +16,9 @@ use App\Models\Post;
 use App\Models\Role;
 use App\Models\Team;
 use App\Models\User;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 
 class A {
     public $foo = 1;
@@ -2663,8 +2666,65 @@ class UserController extends Controller
         */
 
         /* ************************************************** */
+
         /* DateTimeクラス
+            日付、時刻の演算や整形を行うクラス
+
+            new DateTime([string $datetime = "now"[,?DateTimeZone $timezone]])
+
+            Unixタイムスタンプ :
+                1970/1/1 00:00:00からの経過秒で表現した日付・時刻
         */
+
+        /* sample */
+            // $now = new DateTime(); // 引数なしで生成すると現在の日時がセットされる
+            // print $now->format('Y年m月d日 H:i:s'); // formatメソッドは整形のためのもの
+
+            // 文字列からDateTimeオブジェクトを生成
+            // $now = new DateTime('2021/5/15 10:58:31');
+            // print $now->format('Y年m月d日 H:i:s');
+
+            // タイムゾーンの指定
+            // $now = new DateTime(null, new DateTimeZone('Asia/Tokyo')); // DateTimeZoneでタイムゾーンオブジェクトを指定する
+            // print $now->format('Y年m月d日 H:i:s');
+
+            // 年月日、時分秒を個別に設定
+            // $now = new DateTime();
+            // $now->setDate(2021,5,6); // 指定した年月日を設定
+            // $now->setTime(19,30,26); // 指定した時分秒を設定
+            // print $now->format('Y年m月d日 H:i:s');
+
+            // タイムスタンプ値を設定する
+            // $now = new DateTime();
+            // $now->setTimestamp(time()); // timeは現在の日時のタイムスタンプを求めるための関数, setTimeStampはタイムスタンプからDateTimeオブジェクトを生成する
+            // print $now->format('Y年m月d日 H:i:s');
+
+            // formatメソッド : 日付や時刻のフォーマットの整形
+            // $now = new DateTime();
+            // print $now->format('当月の日数はt日');
+            // print $now->format('Y年m月d日 H:i:s');
+            // print $now->format(DateTime::ATOM);
+
+            // createFromFormatメソッド : 日付/時刻文字列を解析
+            // $fmt = 'Y年m月d日 H時i分s秒';
+            // $time = '2020年8月4日 12時36分56秒';
+            // $dt = DateTime::createFromFormat($fmt, $time);
+            // print $dt->format('Y-m-d H:i:s');
+
+            // add / subメソッド : 日付/時刻値の加減算
+            // $now = new DateTime();
+            // print $now->format('Y-m-d H:i:s');
+            // $now->add(new DateInterval("P1YT10H"));
+            // print $now->format('Y-m-d H:i:s');
+            // $now->sub(new DateInterval("P3MT20M"));
+            // print $now->format('Y-m-d H:i:s');
+
+            // diff : 日付の時刻の差分を取得
+            // $dt1 = new DateTime('2021/5/20 11:22:33');
+            // $dt2 = new DateTime('2021/12/04');
+            // $interval = $dt1->diff($dt2, true);
+            // print $interval->format('%Y-%M-%d %H:%i:%s');
+
         /* ************************************************** */
         /* ************************************************** */
         /* ************************************************** */
