@@ -2500,8 +2500,119 @@ class UserController extends Controller
         /* ************************************************** */
 
         /* 関数の呼び出しと戻り値
+            複数の戻り値を返す場合
+                配列として値を一つにして戻す
+
+            再帰関数 :
+                ある関数が自分自身を呼び出すことや、そのような関数のこと
+
+            可変関数 :
+                $変数名()の形式で呼び出せる関数
+                同的に関数を振り分けることができる
+
+            高階関数 :
+                引数として関数そのものを渡したり、戻り値として関数を返すための関数
+
+            コールバック関数 :
+                呼び出し先の関数の中で呼び出される関数
+
+            無名関数(クロージャー) :
+                関数名がなく、特定の機能だけを一度だけ利用する場合に用いられる
+                function(仮引数){
+                    処理
+                    return 戻り値
+                }
+                また、無名関数は変数に代入することもできる
+
+            use命令 :
+                親スコープから変数を引き継ぐために使用する
+                ,区切りで複数の変数を引き継ぐこともできる
+
+            アロー関数(PHP7.4) :
+                無名関数をシンプルに書くための構文
+                fn(仮引数) => 任意の式
+                親スコープの変数を暗黙的に利用できる
+                ただし、アロー関数では単一の式しか書けない
+                また、必ず値渡しとなってしまうので、参照渡しできない
 
         */
+
+        /* sample */
+            // 複数の戻り値を返す
+                // function max_min(...$args) {
+                //     return [max($args), min($args)]; // 配列で返すことで複数の値を同時に返すことができる
+                // }
+
+                // [$max, $min] = max_min(1,2,3,4,5,6,7,8,9); // 分割代入で戻り値を同時に代入することもできる
+                // print $max . ' / ' . $min;
+
+            // 再帰関数の例
+                // function factorial($num){
+                //     if($num){
+                //         return $num * factorial($num -1);
+                //     }
+                //     return 1;
+                // }
+
+                // print factorial(5);
+
+            // 可変関数
+                // function getTriangle($base, $height){
+                //     return $base * $height / 2;
+                // }
+
+                // $name = 'getTriangle';
+                // $area = $name(4, 5);
+                // print $area;
+
+            // 高階関数の実装例
+                // function originArr($array, $func){
+                //     foreach($array as $key => $item){
+                //         $func($key, $item);
+                //     }
+                // }
+
+                // function printOrigin($key, $item){
+                //     print "{$key}:{$item}";
+                // }
+
+                // $array = ['A','B','C','D'];
+                // originArr($array, 'printOrigin');
+
+            // 無名関数を利用した高階関数
+                // function originArr($array, $func){
+                //     foreach($array as $key => $item){
+                //         $func($key, $item);
+                //     }
+                // }
+
+                // $array = ['A','B','C','D'];
+                // originArr($array, function ($key, $item){
+                //     print "{$key}:{$item}";
+                // });
+
+            // use命令
+                // $x = 10;
+                // function totalA($args, $callable){
+                //     $result = 0;
+                //     foreach($args as $arg){
+                //         $result += $arg;
+                //     }
+                //     return $callable($result);
+                // }
+                // print totalA([1,2,3],function($value)use($x){return $value * $x; });
+
+            // アロー関数
+                // $x = 10;
+                // function totalA($args, $callable){
+                //     $result = 0;
+                //     foreach($args as $arg){
+                //         $result += $arg;
+                //     }
+                //     return $callable($result);
+                // }
+                // print totalA([1,2,3,4],fn($value) => $value * $x);
+
         /* ************************************************** */
         /* ************************************************** */
         /* ************************************************** */
